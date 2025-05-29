@@ -63,25 +63,26 @@ void usage(void) {
 }
 
 int main(int argc, char *argv[]) {
-    FILE *out = stdout;
     int i;
     int opt;
 
-    while ((opt = getopt(argc, argv, "FdlmnpqrstuQT")) != -1) {
+    /* Modified getopt handling to work with separate -d -l */
+    while ((opt = getopt(argc, argv, "Fd:l:mnpqrstuQT")) != -1) {
         switch (opt) {
-            case 'F': Fflag++; break;
-            case 'd': dflag++; break;
-            case 'l': lflag++; break;
-            case 'm': mflag++; break;
-            case 'n': nflag++; break;
-            case 'p': pflag++; break;
-            case 'q': qflag++; break;
-            case 'Q': Qflag++; break;
-            case 'r': rflag++; break;
-            case 's': sflag++; break;
-            case 't': tflag++; break;
-            case 'T': Tflag++; break;
-            case 'u': uflag++; break;
+            case 'F': Fflag = 1; break;
+            case 'd': dflag = 1; break;
+            case 'l': lflag = 1; break;
+            case 'm': mflag = 1; break;
+            case 'n': nflag = 1; break;
+            case 'p': pflag = 1; break;
+            case 'q': qflag = 1; break;
+            case 'Q': Qflag = 1; break;
+            case 'r': rflag = 1; break;
+            case 's': sflag = 1; break;
+            case 't': tflag = 1; break;
+            case 'T': Tflag = 1; break;
+            case 'u': uflag = 1; break;
+            case '?':
             default: usage();
         }
     }
@@ -94,7 +95,7 @@ int main(int argc, char *argv[]) {
         errs = ls(".", 0);
     else
         for (i = 0; i < argc; i++)
-            errs |= ls(argv[i], 1);
+            errs |= ls(argv[i], argc > 1);
     output();
     return errs ? 1 : 0;
 }
