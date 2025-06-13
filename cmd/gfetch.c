@@ -321,6 +321,8 @@ int main() {
     get_storage_info(storage_info);
     
     // Print the system information with ASCII art
+    printf("\n");
+    printf("\n");
     printf("             %s@%s\n", username, hostname);
     printf("    (\\(\\     -----------\n");
     printf("   j\". ..    os: %s/%s\n", os_name, arch);
